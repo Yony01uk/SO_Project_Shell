@@ -1,0 +1,9 @@
+cd
+exit
+jobs
+fg
+history
+again
+help
+set
+unset

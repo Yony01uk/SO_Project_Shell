@@ -1,0 +1,10 @@
+muestra informacion sobre el sistema
+
+comandos existentes:
+
+"history"
+"again"
+"cd"
+"help"
+
+modo de uso: help <comando>

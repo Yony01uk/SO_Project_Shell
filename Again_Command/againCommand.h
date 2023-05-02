@@ -1,6 +1,6 @@
-#include "/media/yonatan01/1602CB9502CB77EF/University/3er/SOperativo/Project_Second_Version/ProcessStarter.h"
+#include "../ProcessStarter.h"
 
-#define HISTORY_FILE "/media/yonatan01/1602CB9502CB77EF/University/3er/SOperativo/Project_Second_Version/History_Command/History.txt"
+#define HISTORY_FILE "./History_Command/History.txt"
 #define COMMANDS_COUNT 10
 
 char *SearchCommand(int command)

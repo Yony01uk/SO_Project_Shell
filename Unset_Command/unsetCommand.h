@@ -1,7 +1,7 @@
 #include<fcntl.h>
-#include "/media/yonatan01/1602CB9502CB77EF/University/3er/SOperativo/Project_Second_Version/ProcessStarter.h"
+#include "../ProcessStarter.h"
 
-#define Vars_Root "/media/yonatan01/1602CB9502CB77EF/University/3er/SOperativo/Project_Second_Version/Set_Command/Vars/"
+#define Vars_Root "./Set_Command/Vars/"
 
 char * unsetCommandWorker(char *name)
 {
@@ -13,6 +13,9 @@ char * unsetCommandWorker(char *name)
     if(file == NULL)
         return "FAIL";
     fclose(file);
+    file = fopen("Prove.txt","w");
+    if(file != NULL)
+        fclose(file);
     remove(file_location);
     return "SUCCES";
 }

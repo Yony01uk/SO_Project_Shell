@@ -1,0 +1,7 @@
+modo de uso:
+
+get "var_name"
+
+imprime el valor de la variable llamada "var_name"
+
+si no se da un valor para "var_name" no se imprime nada

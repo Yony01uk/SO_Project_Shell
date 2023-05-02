@@ -1,9 +1,11 @@
-#include "/media/yonatan01/1602CB9502CB77EF/University/3er/SOperativo/Project_Second_Version/ProcessStarter.h"
+#include "../ProcessStarter.h"
 
-#define VARS_ROOT "/media/yonatan01/1602CB9502CB77EF/University/3er/SOperativo/Project_Second_Version/Set_Command/Vars"
+#define VARS_ROOT "./Set_Command/Vars"
 
 char * getCommandWorker(char *name)
 {
+    if(strcmp(name,"NONE") == 0)
+        return "";
     char *file_name = (char *)malloc(sizeof(char)*256);
     file_name = strcpy(file_name,VARS_ROOT);
     file_name = strcat(file_name,"/");

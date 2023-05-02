@@ -6,5 +6,10 @@ comandos existentes:
 "again"
 "cd"
 "help"
+"set"
+"unset"
+"get"
+"jobs"
+"fg"
 
 modo de uso: help <comando>

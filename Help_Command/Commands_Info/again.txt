@@ -1,0 +1,7 @@
+modo de uso:
+
+again <value>
+
+<value> debe ser un numero entre 1 y 10
+
+vuelve a ejecutar la orden numero <value> del historial de ordenes de la shell

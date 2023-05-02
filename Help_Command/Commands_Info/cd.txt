@@ -1,0 +1,5 @@
+modo de uso:
+
+cd <dir>
+
+cambia la direccion donde se ejecuta la shell a la direccion <dir>

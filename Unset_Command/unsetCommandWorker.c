@@ -2,7 +2,6 @@
 
 int main(int argc,char *argv[])
 {
-    Start(argv[0],argv[1],argv[2]);
     char *data = (char *)malloc(sizeof(char)*256);
     char *file_location = (char *)malloc(sizeof(char)*256);
     FILE *file;

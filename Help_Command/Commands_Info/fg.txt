@@ -1,0 +1,7 @@
+modo de uso:
+
+fg <pid>
+
+envia el proceso <pid> hacia el foreground
+
+si el valor <pid> no se especifica, envia al foreground el proceso mas reciente

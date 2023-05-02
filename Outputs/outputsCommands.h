@@ -1,7 +1,7 @@
-#include "/media/yonatan01/1602CB9502CB77EF/University/3er/SOperativo/Project_Second_Version/ProcessStarter.h"
+#include "../ProcessStarter.h"
 
 #define PERMS 0666
-#define FILES_ROOTS "/media/yonatan01/1602CB9502CB77EF/University/3er/SOperativo/Project_Second_Version/Outputs/Outputs_Inputs_Files/"
+#define FILES_ROOTS "./Outputs/Outputs_Inputs_Files/"
 
 //EL PARAMETRO *file SIEMPRE DEBE SER LA RUTA COMPLETA DEL ARCHIVO PARA EVITAR CONFUSIONES POSTERIORES
 

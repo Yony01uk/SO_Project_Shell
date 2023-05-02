@@ -3,7 +3,7 @@
 #include<stdlib.h>
 #include<sys/file.h>
 
-#define COMMAND_OUPUT_ROOT "/media/yonatan01/1602CB9502CB77EF/University/3er/SOperativo/Project_Second_Version/Outputs/Outputs_Inputs_Files/"
+#define COMMAND_OUPUT_ROOT "./Outputs/Outputs_Inputs_Files/"
 #define DIR_OUT "_Dir_Output.txt"
 #define DIR_INPUT "_Dir_Input.txt"
 #define OUTPUT "_Output.txt"

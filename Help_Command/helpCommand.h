@@ -1,7 +1,7 @@
-#include "/media/yonatan01/1602CB9502CB77EF/University/3er/SOperativo/Project_Second_Version/ProcessStarter.h"
+#include "../ProcessStarter.h"
 #include<sys/dir.h>
 
-#define FILES_COMMANDS_INFO "Commands_Info"
+#define FILES_COMMANDS_INFO "./Help_Command/Commands_Info"
 
 char* ReadFile(FILE* file)
 {

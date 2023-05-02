@@ -1,0 +1,7 @@
+modo de uso:
+
+unset "var_name"
+
+elimina la variable llamada "var_name" de la shell
+
+!el valor de "var_name" debe ser proporcionado

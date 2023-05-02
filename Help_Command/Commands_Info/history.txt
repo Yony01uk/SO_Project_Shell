@@ -1,0 +1,1 @@
+imprime las 10 ultimas llineas de comando que se ejecutaron en el shell

@@ -1,0 +1,12 @@
+modo de uso:
+
+set "var_name" `<value>`
+
+declara una variable llamada "var_name" en el shell con valor <value>
+
+si no fue dado un valor para value se imprime el nombre de cada variable y a continuacion el valor
+
+entre las comillas pueden existir comandos tambien, estos deben ejecutarse y el valor devuelto debe usarse en la ejecucion delcomando superior
+
+ejemplo
+set var `command1 | command2`

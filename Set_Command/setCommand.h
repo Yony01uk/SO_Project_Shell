@@ -1,7 +1,7 @@
 #include<sys/dir.h>
-#include "/media/yonatan01/1602CB9502CB77EF/University/3er/SOperativo/Project_Second_Version/ProcessStarter.h"
+#include "../ProcessStarter.h"
 
-#define Vars_Root "/media/yonatan01/1602CB9502CB77EF/University/3er/SOperativo/Project_Second_Version/Set_Command/Vars/"
+#define Vars_Root "./Set_Command/Vars/"
 
 char * setCommandWorkerWithArgs(char *name,char *value)
 {
@@ -44,7 +44,7 @@ char * setCommandWorkerWithOutArgs()
             var_value = fopen(file_name,"r");
             char *content = (char *)malloc(sizeof(char)*256);
             content = fgets(content,10000,var_value);
-            result = strcat(result," ");
+            result = strcat(result,": ");
             result = strcat(result,content);
             result = strcat(result,"\n");
             fclose(var_value);

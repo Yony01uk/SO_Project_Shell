@@ -1,6 +1,6 @@
-#include "/media/yonatan01/1602CB9502CB77EF/University/3er/SOperativo/Project_Second_Version/ProcessStarter.h"
+#include "../ProcessStarter.h"
 
-#define HISTORY_FILE "History.txt"
+#define HISTORY_FILE "./History_Command/History.txt"
 #define HISTORY_SIZE 10
 
 char * historyCommandWorker(char *command)

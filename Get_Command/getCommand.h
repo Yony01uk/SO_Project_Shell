@@ -5,7 +5,7 @@
 char * getCommandWorker(char *name)
 {
     if(strcmp(name,"NONE") == 0)
-        return "";
+        return "NONE";
     char *file_name = (char *)malloc(sizeof(char)*256);
     file_name = strcpy(file_name,VARS_ROOT);
     file_name = strcat(file_name,"/");

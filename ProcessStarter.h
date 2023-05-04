@@ -45,3 +45,17 @@ int Start(char *id_process,char *dir_input,char *dir_output)
     fputs(dir_output,file);
     fclose(file);
 }
+
+int IsUnknownCommand(char *command)
+{
+    FILE *commands = fopen("CommandsList.txt","r");
+    char *data = (char *)malloc(sizeof(char)*256);
+    while(!feof(commands))
+    {
+        data = fgets(data,10000,commands);
+        if(strlen(data) - 1 == strlen(command))
+            if(strncmp(command,data,strlen(command)) == 0)
+                return 0;
+    }
+    return -1;
+}

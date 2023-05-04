@@ -60,7 +60,6 @@ char * setCommandWorkerWithOutArgs()
 
 char *setCommandWorker(char *argv[])
 {
- //   printf("hello");
     if(strcmp(argv[3],"NONE") == 0)
         return setCommandWorkerWithOutArgs();
     return setCommandWorkerWithArgs(argv[3],argv[4]);
@@ -71,22 +70,14 @@ void Tokenize(char *dest[],char *data,char *separator)
     int count = 0;
     for(int i = 0; i < strlen(data); i++)
     {
-        char *character = (char *)malloc(sizeof(char)*256);
-        character = strchr(character,data[i]);
-        if(strcmp(character," ") == 0)
+        if(data[i] == ' ')
         {
-            dest[0] = strncpy(dest[0],data,i);
-            count = i + 1;
-            free(character);
+            count = i;
+            dest[0] = strncpy(dest[0],data,count);
             break;
         }
     }
-    char *character = (char *)malloc(sizeof(char)*256);
-    character = strchr(character,data[count]);
-    dest[1] = strcpy(dest[1],character);
-    for(int i = count + 1; i < strlen(data); i++)
-    {
-        character = strchr(character,data[i]);
-        dest[1] = strcat(dest[1],character);
-    }
+    
+    data += count + 1;
+    dest[1] = strcpy(dest[1],data);
 }

@@ -1,5 +1,6 @@
 #include "../ProcessStarter.h"
 #include<sys/dir.h>
+#include<unistd.h>
 
 #define FILES_COMMANDS_INFO "./Help_Command/Commands_Info"
 
@@ -7,13 +8,11 @@ char* ReadFile(FILE* file)
 {
     char *data = (char *)malloc(sizeof(char)*256);
     char *tmp = (char *)malloc(sizeof(char)*256);
-    fgets(data,100000,file);
-    do
+    while(!feof(file))
     {
         tmp = fgets(tmp,10000,file);
         data = strcat(data,tmp);
     }
-    while(!feof(file));
     return data;
 }
 
@@ -34,12 +33,12 @@ char * helpCommandWorker(char *command)
             continue;
         }
         char *name = (char *)malloc(sizeof(char)*256);
-        name = strncpy(name,file->d_name,strlen(file->d_name) - 4);
-        if(strcmp(name,command) == 0)
+        name = strcpy(name,command);
+        name = strcat(name,".txt");
+        if(strcmp(name,file->d_name) == 0)
         {
             char *file = (char *)malloc(sizeof(char)*256);
-            file = strcat(root_to_info,command);
-            file = strcat(file,".txt");
+            file = strcat(root_to_info,name);
             FILE *file_to_open = fopen(file,"r");
             return ReadFile(file_to_open);
         }

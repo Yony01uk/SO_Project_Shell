@@ -22,7 +22,7 @@ int main(int argc,char *argv[])
     {
         fclose(file);
         file = fopen(data,"r");
-        data = fgets(data,10000,file);
+        data = ReadFile(file);
         char *args[2];
         args[0] = (char *)malloc(sizeof(char)*256);
         args[1] = (char *)malloc(sizeof(char)*256);

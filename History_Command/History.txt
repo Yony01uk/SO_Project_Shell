@@ -1,10 +1,10 @@
-get help
-get help
-get help
-get help
-get help
-get help
-get help
-get help
-get help
-get help
+help nano
+help echo
+help sudo
+echo hola mundo
+ls -l
+help ls
+ls
+get variable
+history
+history

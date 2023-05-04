@@ -13,9 +13,6 @@ char * unsetCommandWorker(char *name)
     if(file == NULL)
         return "FAIL";
     fclose(file);
-    file = fopen("Prove.txt","w");
-    if(file != NULL)
-        fclose(file);
     remove(file_location);
     return "SUCCES";
 }

@@ -3,6 +3,21 @@
 
 #define Vars_Root "./Set_Command/Vars/"
 
+char* ReadFile(FILE* file)
+{
+    char *data = (char *)malloc(sizeof(char)*256);
+    char *temp = (char *)malloc(sizeof(char)*256);
+    data = strcpy(data,"");
+    int a = 1;
+    while(!feof(file))
+    {
+        temp = fgets(temp,10000,file);
+        data = strcat(data,temp);
+    }
+    return data;
+}
+
+
 char * setCommandWorkerWithArgs(char *name,char *value)
 {
     char *location = (char *)malloc(sizeof(char)*256);
@@ -77,7 +92,6 @@ void Tokenize(char *dest[],char *data,char *separator)
             break;
         }
     }
-    
     data += count + 1;
     dest[1] = strcpy(dest[1],data);
 }

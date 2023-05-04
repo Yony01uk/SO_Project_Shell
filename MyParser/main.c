@@ -197,34 +197,37 @@ int main(int argc,char *argv[])
             }
             else if(strcmp(in_command[0],"help") == 0)
             {
+                FILE *f = fopen("Prove.txt","w");
+                fputs(in_command[1],f);
+                fclose(f);
                 char *id = (char *)malloc(sizeof(char)*256);
                 id = int_tostring(line_command);
                 id = strcat(id,"_");
                 id = strcat(id,int_tostring(process));
-                char *args[] = {id,"NONE","NONE",""};
+                Start(id,"NONE","NONE");
                 if(redirection_index == 1)
-                    args[3] = "help";
+                {
+                    char *args[] = {id,"NONE","NONE",in_command[0]};
+                    pid_t p;
+                    p = fork();
+                    if(p == 0)
+                    {
+                        execv("./Help_Command/helpCommandWorker",args);
+                    }
+                    wait(&status);
+                    return status;
+                }
                 else
                 {
-                    args[3] = (char *)malloc(sizeof(char)*256);
-                    args[3] = strcpy(args[3],in_command[1]);
+                    char *args[] = {id,"NONE","NONE",in_command[1]};
+                    if(IsUnknownCommand(args[3]) == -1)
+                    {
+                        char *new_arg = (char *)malloc(sizeof(char)*256);
+                        new_arg = strcpy(new_arg,args[3]);
+                        new_arg = strcat(new_arg," --help");
+                        return UnknownCommandsManager(args[0],new_arg);
+                    }
                 }
-                Start(args[0],args[1],args[2]);
-                if(IsUnknownCommand(args[3]) == -1)
-                {
-                    char *new_arg = (char *)malloc(sizeof(char)*256);
-                    new_arg = strcpy(new_arg,args[3]);
-                    new_arg = strcat(new_arg," --help");
-                    return UnknownCommandsManager(args[0],new_arg);
-                }
-                pid_t p;
-                p = fork();
-                if(p == 0)
-                {
-                    execv("./Help_Command/helpCommandWorker",args);
-                }
-                wait(&status);
-                return status;
             }
             else if(strcmp(in_command[0],"history") == 0)
             {
@@ -354,13 +357,27 @@ int main(int argc,char *argv[])
             {
                 if(strcmp(argv[i],"|") == 0)
                 {
+                    int local_status;
                     char *new_id = (char *)malloc(sizeof(char)*256);
                     new_id = int_tostring(line_command);
                     new_id = strcat(new_id,"_");
                     new_id = strcat(new_id,int_tostring(process));
-                    process++;
                     Start(new_id,"NONE","NONE");
-                    int local_status = Pipe(id,new_id);
+                    if(process > 2)
+                    {
+                        char *new_id_2 = (char *)malloc(sizeof(char)*256);
+                        new_id_2 = int_tostring(line_command);
+                        new_id_2 = strcat(new_id_2,"_");
+                        new_id_2 = strcat(new_id_2,int_tostring(process - 1));
+                        local_status = Pipe(new_id_2,new_id);
+                    }
+                    else
+                    {
+                        local_status = Pipe(id,new_id);
+                    }
+                    process++;
+                    if(local_status != 0)
+                        return status;
                 }
             }
             if(strcmp(in_command[0],"cd") == 0)
@@ -540,32 +557,15 @@ int main(int argc,char *argv[])
                 else if(strcmp(argv[i],"help") == 0)
                 {
                     char *data_in = (char *)malloc(sizeof(char)*256);
-                    char *args[] = {aux_id,"NONE","NONE","NONE"};
                     FILE *f_in = fopen(GetFileName(aux_id,DIR_INPUT),"r");
                     data_in = fgets(data_in,100000,f_in);
                     fclose(f_in);
                     f_in = fopen(data_in,"r");
                     data_in = fgets(data_in,100000,f_in);
                     fclose(f_in);
-                    args[3] = data_in;
                     if(strcmp(data_in,"NONE") == 0)
-                        args[3] = "help";
-                    FILE *f = fopen("Prove.txt","w");
-                    fputs(args[3],f);
-                    fclose(f);
-                    int done = 0;
-                    if(IsUnknownCommand(args[3]) == -1)
                     {
-                        char *new_arg = (char *)malloc(sizeof(char)*256);
-                        new_arg = strcpy(new_arg,args[3]);
-                        new_arg = strcat(new_arg," --help");
-                        int local_status = UnknownCommandsManager(args[0],new_arg);
-                        if(local_status != 0)
-                            return local_status;
-                        done = 1;
-                    }
-                    else if(done == 0)
-                    {
+                        char *args[] = {aux_id,"NONE","NONE","help"};
                         pid_t p;
                         p = fork();
                         if(p == 0)
@@ -575,6 +575,19 @@ int main(int argc,char *argv[])
                         wait(&status);
                         if(status != 0)
                             return status;
+                    }
+                    else 
+                    {
+                        char *args[] = {aux_id,"NONE","NONE",data_in};
+                        if(IsUnknownCommand(args[3]) == -1)
+                        {
+                            char *new_arg = (char *)malloc(sizeof(char)*256);
+                            new_arg = strcpy(new_arg,args[3]);
+                            new_arg = strcat(new_arg," --help");
+                            int local_status = UnknownCommandsManager(args[0],new_arg);
+                            if(local_status != 0)
+                                return local_status;
+                        }
                     }
                 }
                 else if(strcmp(argv[i],"history") == 0)
@@ -608,26 +621,19 @@ int main(int argc,char *argv[])
                 else if(strcmp(argv[i],"get") == 0)
                 {
                     char *args[] = {aux_id,"NONE","NONE","NONE"};
-                    if(redirection_index > 1)
+                    pid_t p;
+                    p = fork();
+                    if(p == 0)
                     {
-                        args[3] = in_command[1];
-                        pid_t p;
-                        p = fork();
-                        if(p == 0)
-                        {
-                            execv("./Get_Command/getCommandWorker",args);
-                        }
-                        wait(&status);
+                        execv("./Get_Command/getCommandWorker",args);
                     }
-                    return status;
+                    wait(&status);
+                    if(status != 0)
+                        return status;
                 }
                 else if(strcmp(argv[i],"unset") == 0)
                 {
                     char *args[] = {aux_id,"NONE","NONE","NONE"};
-                    if(redirection_index > 1)
-                    {
-                        args[3] = in_command[1];
-                    }
                     pid_t p;
                     p = fork();
                     if(p == 0)
@@ -635,7 +641,8 @@ int main(int argc,char *argv[])
                         execv("./Unset_Command/unsetCommandWorker",args);
                     }
                     wait(&status);
-                    return status;
+                    if(status != 0)
+                        return status;
                 }
                 else if(strcmp(argv[i],"exit") == 0)
                 {

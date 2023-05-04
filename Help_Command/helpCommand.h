@@ -21,6 +21,14 @@ char * helpCommandWorker(char *command)
     char *root_to_info = (char *)malloc(sizeof(char)*256);
     root_to_info = strcpy(root_to_info,FILES_COMMANDS_INFO);
     root_to_info = strcat(root_to_info,"/");
+    if(strcmp(command,"NONE") == 0)
+    {
+        char *help_info = (char *)malloc(sizeof(char)*256);
+        help_info = strcpy(help_info,root_to_info);
+        help_info = strcat(help_info,"help.txt");
+        FILE *file_info = fopen(help_info,"r");
+        return ReadFile(file_info);
+    }
     DIR *dir_to_open;
     dir_to_open = opendir(FILES_COMMANDS_INFO);
     struct dirent *file;
